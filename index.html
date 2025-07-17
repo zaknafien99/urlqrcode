@@ -19,9 +19,13 @@
         <input type="text" id="urlInput" placeholder="Enter URL here..." />
         <br>
         <button onclick="generateQRCode()">Generate QR Code</button>
+        <button id="exportPdfBtn" onclick="exportToPDF()" disabled>Export to PDF</button>
         <div id="qrcode"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script>
         function generateQRCode() {
             var url = document.getElementById('urlInput').value;
@@ -34,7 +38,22 @@
                 value: url,
                 size: 200
             });
+            // Enable export button
+            document.getElementById('exportPdfBtn').disabled = false;
         }
+
+        // Export QR code to PDF
+        function exportToPDF() {
+            var canvas = document.querySelector('#qrcode canvas');
+            if (!canvas) return;
+            var imgData = canvas.toDataURL('image/png');
+            var { jsPDF } = window.jspdf;
+            var pdf = new jsPDF();
+            pdf.text('QR Code', 10, 10);
+            pdf.addImage(imgData, 'PNG', 10, 20, 50, 50);
+            pdf.save('qrcode.pdf');
+        }
+
     </script>
 </body>
 </html>
