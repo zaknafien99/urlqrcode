@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL QR Code Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .container { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        input[type="text"] { width: 300px; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 0.5rem 1rem; border: none; background: #0078d7; color: #fff; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #005fa3; }
-        #qrcode { margin-top: 1rem; }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; transition: background 0.3s, color 0.3s; }
+    .container { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: background 0.3s, color 0.3s; }
+    input[type="text"] { width: 300px; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
+    button { padding: 0.5rem 1rem; border: none; background: #0078d7; color: #fff; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #005fa3; }
+    #qrcode { margin-top: 1rem; }
+    .dark-mode { background: #181818 !important; color: #f4f4f4 !important; }
+    .dark-mode .container { background: #232323 !important; color: #f4f4f4 !important; }
+    .dark-mode input[type="text"] { background: #232323; color: #f4f4f4; border: 1px solid #444; }
+    .dark-mode button { background: #444; color: #f4f4f4; }
+    .dark-mode button:hover { background: #222; }
     </style>
 </head>
 <body>
+    <button id="toggleModeBtn" style="position: absolute; top: 20px; right: 20px;">🌙 Dark Mode</button>
     <div class="container">
         <h2>QR Code Generator</h2>
         <input type="text" id="urlInput" placeholder="Enter URL here..." />
@@ -53,6 +59,17 @@
             pdf.addImage(imgData, 'PNG', 10, 20, 50, 50);
             pdf.save('qrcode.pdf');
         }
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            var body = document.body;
+            var btn = document.getElementById('toggleModeBtn');
+            var isDark = body.classList.toggle('dark-mode');
+            btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+        }
+        document.getElementById('toggleModeBtn').addEventListener('click', toggleDarkMode);
+        
+        
 
     </script>
 </body>
