@@ -11,6 +11,7 @@
     button { padding: 0.5rem 1rem; border: none; background: #0078d7; color: #fff; border-radius: 4px; cursor: pointer; }
     button:hover { background: #005fa3; }
     #qrcode { margin-top: 1rem; }
+    #toggleModeBtn { position: absolute; top: 20px; right: 20px; }
     .dark-mode { background: #181818 !important; color: #f4f4f4 !important; }
     .dark-mode .container { background: #232323 !important; color: #f4f4f4 !important; }
     .dark-mode input[type="text"] { background: #232323; color: #f4f4f4; border: 1px solid #444; }
@@ -18,7 +19,7 @@
     .dark-mode button:hover { background: #222; }
     </style>
 </head>
-<body>
+    <button id="toggleModeBtn">🌙 Dark Mode</button>
     <button id="toggleModeBtn" style="position: absolute; top: 20px; right: 20px;">🌙 Dark Mode</button>
     <div class="container">
         <h2>QR Code Generator</h2>
